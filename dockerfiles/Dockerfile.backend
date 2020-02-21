@@ -2,7 +2,7 @@ FROM node:13-alpine
 
 WORKDIR /server/backend
 
-COPY backend .
+COPY project_board_backend .
 COPY entrypoint.backend.sh .
 
 RUN npm install && chmod 777 ./entrypoint.backend.sh
