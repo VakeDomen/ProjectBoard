@@ -1,0 +1,12 @@
+FROM node:13-alpine
+
+WORKDIR /server/backend
+
+COPY backend .
+COPY entrypoint.backend.sh .
+
+RUN npm install && chmod 777 ./entrypoint.backend.sh
+
+EXPOSE 3000
+
+ENTRYPOINT ["sh", "./entrypoint.backend.sh"]

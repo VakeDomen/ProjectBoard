@@ -1,0 +1,6 @@
+[submodule "project_board_backend"]
+	path = project_board_backend
+	url = https://github.com/VakeDomen/project_board_backend.git
+[submodule "project_board_frontend"]
+	path = project_board_frontend
+	url = https://github.com/VakeDomen/project_board_frontend.git

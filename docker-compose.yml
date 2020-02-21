@@ -1,0 +1,20 @@
+version: '3.2'
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: ./dockerfiles/Dockerfile.backend
+    restart: "unless-stopped"
+    environment: 
+      - PORT=3000
+      - SQLITE_DB=./sqlite.db
+    ports: 
+      - 3000:3000
+  frontend:
+    build:
+      context: .
+      dockerfile: ./dockerfiles/Dockerfile.frontend
+    restart: "unless-stopped"
+    ports: 
+      - 80:80
