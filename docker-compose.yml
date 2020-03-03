@@ -18,3 +18,10 @@ services:
     restart: "unless-stopped"
     ports: 
       - 80:80
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.project_board.rule=Host(`vakedomen.ml`)
+      - traefik.http.routers.project_board.tls=true
+      - traefik.http.routers.project_board.tls.certresolver=letsEncrypt
+      - traefik.http.routers.project_board.service=project_board
+      - traefik.http.services.project_board.loadbalancer.server.port=80
