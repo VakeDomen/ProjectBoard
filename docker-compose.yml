@@ -14,7 +14,7 @@ services:
       - proxy
     labels:
       - traefik.enable=true
-      - traefik.http.routers.project_board_backend.rule=Host(`api.projectboard.vakedomen.ml`)
+      - traefik.http.routers.project_board_backend.rule=Host(`${BACKEND_DOMAIN}`)
       - traefik.http.routers.project_board_backend.entrypoints=websecure
       - traefik.http.routers.project_board_backend.tls.certresolver=le
 
@@ -28,7 +28,7 @@ services:
       - proxy
     labels:
       - traefik.enable=true
-      - traefik.http.routers.project_board.rule=Host(`projectboard.vakedomen.ml`)
+      - traefik.http.routers.project_board.rule=Host(`${FRONTEND_DOMAIN}`)
       - traefik.http.routers.project_board.entrypoints=websecure
       - traefik.http.routers.project_board.tls.certresolver=le
 
