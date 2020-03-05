@@ -1,6 +1,7 @@
 version: '3.2'
 
 services:
+
   backend:
     build:
       context: .
@@ -9,19 +10,29 @@ services:
     environment: 
       - PORT=3000
       - SQLITE_DB=./sqlite.db
-    ports: 
-      - 3000:3000
+    networks:
+      - proxy
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.project_board_backend.rule=Host(`api.projectboard.vakedomen.ml`)
+      - traefik.http.routers.project_board_backend.entrypoints=websecure
+      - traefik.http.routers.project_board_backend.tls.certresolver=le
+
   frontend:
+    container_name: porject_board
     build:
       context: .
       dockerfile: ./dockerfiles/Dockerfile.frontend
     restart: "unless-stopped"
-    ports: 
-      - 80:80
+    networks:
+      - proxy
     labels:
       - traefik.enable=true
-      - traefik.http.routers.project_board.rule=Host(`vakedomen.ml`)
-      - traefik.http.routers.project_board.tls=true
-      - traefik.http.routers.project_board.tls.certresolver=letsEncrypt
-      - traefik.http.routers.project_board.service=project_board
-      - traefik.http.services.project_board.loadbalancer.server.port=80
+      - traefik.http.routers.project_board.rule=Host(`projectboard.vakedomen.ml`)
+      - traefik.http.routers.project_board.entrypoints=websecure
+      - traefik.http.routers.project_board.tls.certresolver=le
+
+
+networks:
+  proxy:
+    external: true
