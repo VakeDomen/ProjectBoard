@@ -11,6 +11,10 @@ services:
     environment: 
       - PORT=12000
       - SQLITE_DB=./sqlite.db
+      - ADMIN_EMAIL=${ADMIN_EMAIL}
+      - HASH_SALT_ROUNDS=10
+      - JWT_SECRET=${JWT_SECRET}
+
     networks:
       - proxy
     labels:
