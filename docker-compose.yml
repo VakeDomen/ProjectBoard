@@ -3,12 +3,13 @@ version: '3.2'
 services:
 
   backend:
+    container_name: project_board_backend
     build:
       context: .
       dockerfile: ./dockerfiles/Dockerfile.backend
     restart: "unless-stopped"
     environment: 
-      - PORT=3000
+      - PORT=12000
       - SQLITE_DB=./sqlite.db
     networks:
       - proxy
@@ -16,8 +17,9 @@ services:
       - traefik.enable=true
       - traefik.http.routers.project_board_backend.rule=Host(`${BACKEND_DOMAIN}`)
       - traefik.http.routers.project_board_backend.entrypoints=websecure
+      - traefik.http.routers.project_board_backend.tls=true
       - traefik.http.routers.project_board_backend.tls.certresolver=le
-
+      - traefik.http.services.project_board_backend.loadbalancer.server.port=12000
   frontend:
     container_name: porject_board
     build:
@@ -30,8 +32,9 @@ services:
       - traefik.enable=true
       - traefik.http.routers.project_board.rule=Host(`${FRONTEND_DOMAIN}`)
       - traefik.http.routers.project_board.entrypoints=websecure
+      - traefik.http.routers.project_board.tls=true
       - traefik.http.routers.project_board.tls.certresolver=le
-
+#      - traefik.http.services.project_board.loadbalancer.server.port=12001
 
 networks:
   proxy:
