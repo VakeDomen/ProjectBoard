@@ -12,7 +12,6 @@ COPY project_board_frontend /app
 
 RUN npm install -g @angular/cli
 RUN npm install
-RUN apk --no-cache add --virtual builds-deps build-base python
 RUN ng build --output-path=dist --prod
 
 FROM nginx:1.17-alpine

@@ -5,6 +5,7 @@ WORKDIR /server/backend
 COPY project_board_backend .
 COPY entrypoint.backend.sh .
 
+RUN apk --no-cache add --virtual builds-deps build-base python
 RUN npm install && chmod 777 ./entrypoint.backend.sh
 
 EXPOSE 3000
