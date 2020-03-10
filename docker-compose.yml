@@ -38,6 +38,11 @@ services:
       - traefik.http.routers.project_board.entrypoints=websecure
       - traefik.http.routers.project_board.tls=true
       - traefik.http.routers.project_board.tls.certresolver=le
+
+      - traefik.http.routers.project_board_2.rule=Host(`${FRONTEND_DOMAIN_2}`)
+      - traefik.http.routers.project_board_2.entrypoints=websecure
+      - traefik.http.routers.project_board_2.tls=true
+      - traefik.http.routers.project_board_2.tls.certresolver=le
 #      - traefik.http.services.project_board.loadbalancer.server.port=12001
 
 networks:
